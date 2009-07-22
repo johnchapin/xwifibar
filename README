@@ -1,0 +1,25 @@
+xwifibar README
+---------------
+John Chapin <john+xwifibar@jtan.com>
+
+DESCRIPTION:
+------------
+xwifibar is an unobtrusive wireless signal strength meter for X11, heavily
+inspired by xbattbar.  Stats come from /proc/net/wireless.
+
+BUILDING:
+---------
+$ tar xzvf xwifibar-0.1.7.tar.gz
+$ cd ./xwifibar-0.1.7/
+$ xmkmf -a
+$ make
+$ make install
+$ make install.man
+
+THANKS:
+-------
+Suguru Yamaguchi <suguru@wide.ad.jp>
+
+VERSION:
+--------
+* 0.1.7 - First public release.

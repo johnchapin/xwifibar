@@ -1,0 +1,31 @@
+.TH XWIFIBAR 1 "February 18, 2004" "version 0.1.8" "USER COMMANDS"
+.SH NAME
+xwifibar \- show wireless signal strength in an X window
+.SH SYNOPSIS
+.B xwifibar
+[\-a] [\-w width] [\-p interval] [\-i interface] [top | bottom | left | right]
+.SH DESCRIPTION
+xwifibar shows the current wireless signal strength as reported by /proc/net/wireless.
+.SH OPTIONS
+.TP
+\-v
+Show version.
+.TP
+\-h
+Show usage.
+.TP
+\-a
+Always on top.  Default is off.
+.TP
+\-w width
+Bar width (thickness).  Default is 2 pixels.
+.TP
+\-p interval
+/proc/net/wireless polling interval (seconds).  Default is 1 second.
+.TP
+\-i interface
+Wireless interface name.  Default is eth1.
+.SH AUTHOR
+John Chapin <john+xwifibar@jtan.com>
+.SH THANKS
+Suguru Yamaguchi <suguru@wide.ad.jp>, author of xbattbar.

@@ -1,0 +1,25 @@
+XCOMM This program is free software; you can redistribute it and/or modify it
+XCOMM under the terms of the GNU General Public License as published
+XCOMM by the Free Software Foundation; either version 2 of the License, or (at
+XCOMM your option) any later version.
+XCOMM 
+XCOMM This program is distributed in the hope that it will be useful, but
+XCOMM WITHOUT ANY WARRANTY; without even the implied warranty of
+XCOMM MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+XCOMM General Public License for more details.
+XCOMM 
+XCOMM You should have received a copy of the GNU General Public
+XCOMM License along with this program; if not, write to the Free Software
+XCOMM Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+XCOMM 
+
+BINDIR = /usr/X11R6/bin
+MANDIR = /usr/share/man/man1
+
+LOCAL_LIBRARIES = $(XLIB)
+
+SRCS = xwifibar.c
+OBJS = xwifibar.o
+TARGET = xwifibar
+
+ComplexProgramTarget($(TARGET))
