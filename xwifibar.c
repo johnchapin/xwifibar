@@ -18,10 +18,12 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <X11/Xlib.h>
 #include <sys/time.h>
 #include <signal.h>
+#include <limits.h>
 
 #define BW_DEF 2
 #define PI_DEF 1
@@ -36,7 +38,8 @@ const char *PROGNAME = "xwifibar";
 const char *PROGVERS = "0.1.7";
 const char *PROGAUTH = "John Chapin <john.chapin@gmail.com>";
 const char *PROCPATH = "/proc/net/wireless";
-const float LQMAX = 92.0;
+const char *AIRPORT_COMMAND = "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | head -n 1 | awk {'print $2'}";
+const float LQMAX = 92.0; // TODO: This is not a universal value, varies between wifi chipsets
 
 char *ifname = "eth1";
 
@@ -334,8 +337,23 @@ kill_stat() {
 
 void
 stat_poll() {
+#if defined(__APPLE_CPP__) || defined(__APPLE_CC__) // Mac OS X
+        char line[LINE_MAX];
+        FILE *fp;
+
+        fp = popen(AIRPORT_COMMAND,"r");
+        while (!feof(fp)) {
+                if (fgets(line, LINE_MAX, fp) != NULL) {
+			sscanf(line,"%d",&link_quality);
+                }
+        }
+
+        pclose(fp);
+
+	link_quality = LQMAX - abs(link_quality);
+#else // anything else, hopefully with /proc/net/wireless
 	FILE *fd;
-	char tmp[255];
+	char tmp[LINE_MAX];
 	char *p;
 	
 	fd = fopen(PROCPATH,"r");
@@ -344,10 +362,10 @@ stat_poll() {
 	}
 
 	/* skip two lines of headers */
-	fgets(tmp,255,fd);
-	fgets(tmp,255,fd);
+	fgets(tmp,LINE_MAX,fd);
+	fgets(tmp,LINE_MAX,fd);
 	
-	while (fgets(tmp,255,fd)) {
+	while (fgets(tmp,LINE_MAX,fd)) {
 		p = tmp + strspn(tmp," ");
 		if (!strncmp(p,ifname,strlen(ifname))) {
 			p += strspn(p," ") + 1;
@@ -356,4 +374,5 @@ stat_poll() {
 	}	
 
 	fclose(fd);
+#endif
 }
