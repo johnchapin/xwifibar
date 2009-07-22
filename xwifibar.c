@@ -1,5 +1,5 @@
 /*  xwifibar - an unobtrusive wireless signal strength meter
- *  Copyright (C) 2004 John Chapin <john+xwifibar@jtan.com>
+ *  Copyright (C) 2009 John Chapin <john.chapin@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@
 /* global variables */
 const char *PROGNAME = "xwifibar";
 const char *PROGVERS = "0.1.7";
-const char *PROGAUTH = "John Chapin <john+xwifibar@jtan.com>";
+const char *PROGAUTH = "John Chapin <john.chapin@gmail.com>";
 const char *PROCPATH = "/proc/net/wireless";
 const float LQMAX = 92.0;
 
